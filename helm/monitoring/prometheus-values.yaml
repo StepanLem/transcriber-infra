@@ -1,3 +1,6 @@
+# тут нужно будет прописать persistence
+# прописать откуда собирать метрики
+
 server:
   persistentVolume:
     enabled: true

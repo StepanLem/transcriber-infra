@@ -1,3 +1,9 @@
+# ну крч тут нужен persistence (mount volume или как он там). Не помню точно зачем он графане. Пусть гпт раскажет.
+# datasources явно описаны(loki и prometheus)
+# и дашборды понять как здесь передавать(и нужен гайд как их копирывать из папки volume)
+
+# остальное хз
+
 admin:
   existingSecret: grafana-admin-credentials
   userKey: admin-user
