@@ -4,11 +4,13 @@ global:
 
 # Настройки приложения
 app:
-  name: transcriber-app
+  name: transcriber
   image:
-    repository: stepanlem/transcriber-app
-    tag: cpu
-    pullPolicy: IfNotPresent
+    repository: registry.gitlab.com/stepanlem/transcriber
+    tag: latest
+    pullPolicy: Always
+  imagePullSecret:
+    name: regcred
   replicaCount: 1
   resources:
     requests:
@@ -56,11 +58,5 @@ postgresql:
     type: ClusterIP
     port: 5432
   secret:
-    # Эти значения должны быть установлены при установке чарта
-    # или через values файл
-    dbuser: "postgres"
-    dbpassword: "admin"
     dbhost: "postgres"
     dbport: "5432"
-    database: "whisperdb" 
-    secretkey: "supersecret"
