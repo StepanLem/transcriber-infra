@@ -20,7 +20,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: {{ .Values.app.name }}
+            name: {{ .Values.app.service.name }}
             port:
               number: {{ .Values.app.service.port }}
 {{- end }} 

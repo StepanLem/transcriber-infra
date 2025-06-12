@@ -1,0 +1,36 @@
+# Посмотреть дефолтные значения:
+# helm show values ingress-nginx/ingress-nginx > temp-values.yaml
+
+# NOTE: закомментированное = явно прописанные дефолтные значения.
+
+controller:
+  # чат гпт предложил 2. В дефолте 1. Для отказоустойчиваости, если один под уападёт. Платишь ты за loadBalancer сервис, а сервис у обоих этих подов один.
+  # replicaCount: 1
+
+  # Чтобы явно прописывать к какому из возможных нескольких ingress-cotroller.name привязаны ingress.yaml
+  # ingressClassResource:
+  #   name: nginx
+  #   enabled: true
+  #   default: false
+
+  # "NodePort" - если нет внешнего LoadBalancer(облачный или MetalLB). "LoadBalancer" в обратном. 
+  service:
+    type: NodePort
+
+  # По дефолту выключены. Там несколько параметров внутри. Надо на деле с мониторингом разбираться с ServiceMonitor, prometheusRule и мониторигом в целом.
+  # metrics:
+  #   enabled: false
+
+# По дефолту не было лимитов(только requests). Видимо чтобы не убивался процесс. Ну а мы попробуем.
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+# Дефолтная 404 страница. Обычно у приложений делают свою.
+# А эта просто выдаёт request: "default backend - 404", вместо белой базовой страницы nginx с "404 Not Found. nginx". Так что даже хуже, чем бесполезная штука.
+# defaultBackend:
+#   enabled: false

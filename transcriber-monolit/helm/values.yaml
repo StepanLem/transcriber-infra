@@ -20,6 +20,7 @@ app:
       cpu: 1000m
       memory: 1Gi
   service:
+    name: transcriber-service
     type: LoadBalancer
     port: 80
     targetPort: 8000
